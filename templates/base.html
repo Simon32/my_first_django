@@ -25,7 +25,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainMenu">
-                {% if user.isauthenticated %}
+                {% if user.is_authenticated %}
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown"
@@ -33,7 +33,7 @@
                                 {{ user.username }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-                                <a class="dropdown-item" href="#">My accoutn</a>
+                                <a class="dropdown-item" href="#">My account</a>
                                 <a class="dropdown-item" href="#">Change password</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
