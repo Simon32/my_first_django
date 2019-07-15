@@ -22,7 +22,7 @@ def board_topics(request, pk):
     #     board = Board.objects.get(pk=pk)
     # except Board.DoesNotExist:
     #     raise Http404
-    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts') )
+    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts'))
     return render(request, 'topics.html', {'board': board, 'topics': topics})
 
 
@@ -55,6 +55,8 @@ def new_topic(request, pk):
 
 def topic_posts(request, pk, topic_pk):
     topic = get_object_or_404(Topic, board__pk=pk, pk=topic_pk)
+    topic.views += 1
+    topic.save()
     return render(request, 'topic_posts.html', {'topic': topic})
 
 
