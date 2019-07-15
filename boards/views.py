@@ -7,6 +7,7 @@ from .forms import NewTopicForm
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from .models import Topic
+from django.db.models import Count
 
 
 # Create your views here.
@@ -21,7 +22,8 @@ def board_topics(request, pk):
     #     board = Board.objects.get(pk=pk)
     # except Board.DoesNotExist:
     #     raise Http404
-    return render(request, 'topics.html', {'board': board})
+    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts') )
+    return render(request, 'topics.html', {'board': board, 'topics': topics})
 
 
 # def new_topic(request, pk):
